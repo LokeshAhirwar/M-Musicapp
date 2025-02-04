@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
@@ -19,16 +21,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.twotone.FavoriteBorder
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -69,28 +75,22 @@ fun PlayerScreen(){
         ) {
 
 
-            Card(
+            Card( //music card
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp)
+                    .padding(40.dp)
                     .weight(2f)
-//               .background(Brush.verticalGradient(colors = listOf(
-//                   Color.Blue.copy(alpha = 0.2f),
-//                   Color.White.copy(alpha = 0.4f)
-//               )))
-                    .blur(5.dp)
-
-//           , colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-                , shape = CircleShape
+                , shape = CardDefaults.shape
             ) {
-                Image(painter = painterResource(R.drawable.album_image_2)
+                Image(painter = painterResource(R.drawable.bgphoto)
                     , contentDescription = null
-                    , contentScale = ContentScale.Fit)
+                    , contentScale = ContentScale.Crop)
 
             }
 
 
-            Row(modifier = Modifier.weight(1f)) {
+            Row(modifier = Modifier.weight(1f)
+                .padding(start = 20.dp, end = 20.dp)) {
                 Column(modifier = Modifier.weight(1f) ) {
                     Text("Song Title", fontWeight = FontWeight.Bold , fontSize = 20.sp)
                     Text("singer")
@@ -105,12 +105,33 @@ fun PlayerScreen(){
             }
             Row(modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)) {
-                Icon(imageVector = Icons.Default.Refresh, contentDescription = "reverse", modifier = Modifier.weight(1f))
-                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = "previous music",modifier = Modifier.weight(1f))
-                Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "play",modifier = Modifier.weight(1f))
-                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = "play next",modifier = Modifier.weight(1f))
-                Icon(imageVector = Icons.Default.Close, contentDescription = "shuffle",modifier = Modifier.weight(1f))
+                .weight(1f)
+            , horizontalArrangement = Arrangement.SpaceEvenly) {
+                IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Default.Refresh,contentDescription = null
+                        , modifier = Modifier.size(40.dp))
+                }
+                IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Default.KeyboardArrowLeft,contentDescription = null
+                        , modifier = Modifier.size(40.dp))
+                }
+                IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Default.PlayArrow,contentDescription = "payer button"
+                    , modifier = Modifier.size(70.dp))
+                }
+                IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Default.KeyboardArrowRight,contentDescription = null
+                        , modifier = Modifier.size(40.dp))
+                }
+                IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Default.FavoriteBorder,contentDescription = null
+                        , modifier = Modifier.size(40.dp))
+                }
+
+
+
+
+
 
             }
 

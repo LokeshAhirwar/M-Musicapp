@@ -51,7 +51,6 @@ fun HomeScreen(modifier: Modifier){
 //        }
         Box(modifier = Modifier
             .fillMaxSize()
-//            .background(Color.Green.copy(alpha = .2f)
             .background(
                 Brush.verticalGradient( colors = listOf(
                     Color.Blue.copy(alpha = .5f),
