@@ -35,12 +35,14 @@ import com.example.m_music.Data.BottomNavigationItems
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
     modifier: Modifier,
-    scrollBehavior: TopAppBarScrollBehavior
+    scrollBehavior: TopAppBarScrollBehavior,
+    navController: NavController
 ){
     TopAppBar(
         modifier = Modifier ,
@@ -49,7 +51,6 @@ fun TopBar(
 //            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
 //        )
         colors = TopAppBarDefaults.topAppBarColors(
-//            containerColor = MaterialTheme.colorScheme.background
             containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.0f)
         ),
         title = {Text("M-Music",
@@ -80,7 +81,12 @@ fun TopBar(
     )
 }
 @Composable
-fun Bottombar(){
+fun Bottombar( navController: NavController){
+//    val lONavigationItems = listOf(
+//        Routes.Home,
+//        Routes.Search,
+//        Routes.PlayerScreen
+//    )
     var selectedIndex by remember { mutableStateOf(0) }
     val lONavigationItems = listOf(
         BottomNavigationItems(
@@ -95,25 +101,23 @@ fun Bottombar(){
             title = "Explore",
             filledIcon = Icons.Filled.Search,
             outlinedIcon = Icons.Outlined.Search,
-            route = "Explore"
+            route = "Search"
         ),
         BottomNavigationItems(
             title = "Downloads",
             filledIcon = Icons.Filled.KeyboardArrowDown,
             outlinedIcon = Icons.Outlined.KeyboardArrowDown,
-            route = "Explore"
-        ),
-        BottomNavigationItems(
-            title = "Local Library",
-            filledIcon = Icons.Filled.Face,
-            outlinedIcon = Icons.Outlined.Face,
-            route = "Explore"
+            route = "PlayerScreen"
         )
+//        BottomNavigationItems(
+//            title = "Local Library",
+//            filledIcon = Icons.Filled.Face,
+//            outlinedIcon = Icons.Outlined.Face,
+//            route = "Explore"
+//        )
     )
     BottomAppBar(
-        modifier = Modifier
-        ,
-
+        modifier = Modifier,
         containerColor = Color.Transparent
     ) {
         NavigationBar {
@@ -121,6 +125,11 @@ fun Bottombar(){
                 NavigationBarItem(selected = selectedIndex==index,
                     onClick = {
                         selectedIndex = index
+                        navController.navigate(item.route)
+//                        {
+//                            launchSingleTop = true
+//                            restoreState = true
+//                        }
                     },
                     icon =  {
                         Icon(imageVector = if (selectedIndex == index) item.filledIcon else item.outlinedIcon,

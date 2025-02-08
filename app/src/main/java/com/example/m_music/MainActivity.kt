@@ -38,9 +38,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.m_music.Data.BottomNavigationItems
+import com.example.m_music.Navigation.navigation
 import com.example.m_music.Screens.Bottombar
 import com.example.m_music.Screens.HomeScreen
+import com.example.m_music.Screens.MainScreen
 import com.example.m_music.Screens.TopBar
 //import com.example.m_music.ui.theme.MMusicTheme
 import com.example.m_music.ui.theme.AppTheme
@@ -60,42 +63,9 @@ class MainActivity : ComponentActivity() {
 //                }
 //            }
             AppTheme {
-
-                val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
-                    state = rememberTopAppBarState()
-                )
-                Scaffold(modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopBar(modifier = Modifier,
-                        scrollBehavior= scrollBehavior)}
-                , bottomBar = {
-                        Bottombar()
-                    }) { innerPadding ->
-
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                    HomeScreen(modifier = Modifier.padding(innerPadding))
-//                    playerScreen(modifier = Modifier.padding(innerPadding))
-                }
+                MainScreen()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppTheme {
-        Greeting("Android")
     }
 }
 

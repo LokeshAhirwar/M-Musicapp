@@ -50,14 +50,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.m_music.R
 import com.example.m_music.Repeated_functionalities.blurBackground
 import com.example.m_music.ui.theme.primaryLight
 
 
 @Composable
-@Preview(showSystemUi = true)
-fun PlayerScreen(){
+//@Preview(showSystemUi = true)
+fun PlayerScreen(navController: NavController){
     Box(modifier = Modifier.fillMaxSize()){
         var clist = listOf(
             Color.Black.copy(alpha = 0.4f),
