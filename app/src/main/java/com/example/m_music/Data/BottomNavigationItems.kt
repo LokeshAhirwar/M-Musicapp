@@ -8,6 +8,6 @@ data class BottomNavigationItems(
     val title: String,
     val filledIcon: ImageVector,
     val outlinedIcon: ImageVector,
-    val route: String,
+    val route: String
 
     )

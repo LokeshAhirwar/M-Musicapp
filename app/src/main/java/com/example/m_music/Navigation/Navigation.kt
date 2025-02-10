@@ -1,5 +1,6 @@
 package com.example.m_music.Navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposableTarget
 import androidx.compose.ui.Modifier
@@ -16,13 +17,13 @@ import com.example.m_music.Screens.SearchScreen
 fun navigation(modifier: Modifier){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home"){
-       composable(route = "Home"){
+       composable(route = Routes.Home.routes){
            HomeScreen(navController)
        }
-        composable(route = "Search"){
+        composable(route = Routes.Search.routes){
             SearchScreen(navController)
         }
-        composable(route = "PlayerScreen"){
+        composable(route = Routes.PlayScreen.routes){
             PlayerScreen(navController)
         }
 //        composable<BhaiyaRoutes.Home>{

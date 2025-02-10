@@ -10,13 +10,19 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable
 
-sealed  class Routes{
+//sealed  class Routes(val routes: String,val filled: ImageVector,val outlined: ImageVector,val title: String)
+sealed  class Routes(val routes: String){
+
+    data object Home: Routes("Home",)
+    data object Search: Routes("Search")
+    data object PlayScreen: Routes("PlayerScreen")
+
 //    abstract val route: String
 //    abstract val title: String
 //    abstract val filledIcon: ImageVector
 //    abstract val outlinedIcon: ImageVector
-    @Serializable
-    data object Home:Routes()
+//    @Serializable
+//    data object Home:Routes()
 //{
 //        override val route = "HomeScreen"
 //        override val title: String
@@ -28,8 +34,8 @@ sealed  class Routes{
 //
 //    }
 
-    @Serializable
-    data object PlayerScreen: Routes()
+//    @Serializable
+//    data object PlayerScreen: Routes()
 //    {
 //        override val route = "player"
 //        override val title: String
@@ -40,8 +46,8 @@ sealed  class Routes{
 //            get() = Icons.Outlined.PlayArrow
 //    }
 
-    @Serializable
-    data object Search: Routes()
+//    @Serializable
+//    data object Search: Routes()
 //    {
 //        override val route: String
 //            get()  = "SearchScreen"

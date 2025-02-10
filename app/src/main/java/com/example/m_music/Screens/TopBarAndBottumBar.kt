@@ -36,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,8 +52,7 @@ fun TopBar(
 //            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
 //        )
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.0f)
-        ),
+            containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.0f)),
         title = {Text("M-Music",
             color = MaterialTheme.colorScheme.onBackground.copy(0.7f) )},
         navigationIcon = {
@@ -88,12 +88,14 @@ fun Bottombar( navController: NavController){
 //        Routes.PlayerScreen
 //    )
     var selectedIndex by remember { mutableStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currenRoute = navBackStackEntry?.destination?.route
     val lONavigationItems = listOf(
         BottomNavigationItems(
             title =  "Home",
             filledIcon = Icons.Filled.Home,
             outlinedIcon = Icons.Outlined.Home,
-            route = "Home"
+            route = Routes.Home.routes
 
 
         ),
@@ -101,13 +103,13 @@ fun Bottombar( navController: NavController){
             title = "Explore",
             filledIcon = Icons.Filled.Search,
             outlinedIcon = Icons.Outlined.Search,
-            route = "Search"
+            route = Routes.Search.routes
         ),
         BottomNavigationItems(
             title = "Downloads",
             filledIcon = Icons.Filled.KeyboardArrowDown,
             outlinedIcon = Icons.Outlined.KeyboardArrowDown,
-            route = "PlayerScreen"
+            route = Routes.PlayScreen.routes
         )
 //        BottomNavigationItems(
 //            title = "Local Library",
@@ -126,10 +128,13 @@ fun Bottombar( navController: NavController){
                     onClick = {
                         selectedIndex = index
                         navController.navigate(item.route)
-//                        {
-//                            launchSingleTop = true
-//                            restoreState = true
-//                        }
+                        {
+                            popUpTo(navController.graph.startDestinationId){
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     icon =  {
                         Icon(imageVector = if (selectedIndex == index) item.filledIcon else item.outlinedIcon,
