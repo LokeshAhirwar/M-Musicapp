@@ -1,8 +1,12 @@
 package com.example.m_music.Screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,6 +19,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 //import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
@@ -23,21 +28,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+//import androidx.navigation.NavController
 import com.example.m_music.Data.Album
 import com.example.m_music.Data.Song
 import com.example.m_music.R
+import com.example.m_music.Repeated_functionalities.blurBackground
 
 //import com.example.m_music.Screens.albums
 
-//@Preview(showSystemUi = true)
+@Preview(showSystemUi = true)
 @Composable
-fun SearchScreen(navController: NavController){
+fun SearchScreen()
+//fun SearchScreen(navController: NavController,modifier: Modifier)
+{
     val albumList = listOf(
         Album( title = "first Alnum", imageres = R.drawable.album_image1, songs = listOf(
             Song("tittle 1","artist 1",R.drawable.s1),
@@ -62,23 +71,42 @@ fun SearchScreen(navController: NavController){
         ))
     )
     var searchText by remember { mutableStateOf("") }
-    Column {
-            OutlinedTextField(value = searchText, onValueChange = {searchText=it},
-                label = {"Search Your favorites"}
-                , keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-                    , singleLine = true
-            , leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search here") })
+    var enableState by remember { mutableStateOf(false) }
 
-                val result = albumList.filter { it.title.contains(searchText,ignoreCase = true) }
+    Box(
+
+    ){
+        //blur effect fuction
+        blurBackground()
+        Column {
+            OutlinedTextField(value = searchText, onValueChange = {searchText=it}
+                , colors = OutlinedTextFieldDefaults.colors(Color.Blue)
+                ,label = {"Search Your favorites"}
+                , keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                , singleLine = true
+                , placeholder = { Text("Search your favorites here")}
+                , leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search here") }
+                , shape = RoundedCornerShape(20.dp)
+                , enabled = enableState
+
+            ,modifier = Modifier
+//                .background(Color.White.copy(alpha = .5f))
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp)
+                    .clickable(onClick = { enableState = true}))
+
+            val result = albumList.filter { it.title.contains(searchText,ignoreCase = true) }
             LazyColumn {
                 items(result){
-                    album ->
+                        album ->
                     ShowAlbumList(album)
                 }
 
             }
 //            ShowAlbumList(result);
         }
+    }
+
 
 }
 

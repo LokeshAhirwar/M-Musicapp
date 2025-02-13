@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -44,6 +46,8 @@ import com.example.m_music.Navigation.navigation
 import com.example.m_music.Screens.Bottombar
 import com.example.m_music.Screens.HomeScreen
 import com.example.m_music.Screens.MainScreen
+import com.example.m_music.Screens.PlayerScreen
+import com.example.m_music.Screens.SearchScreen
 import com.example.m_music.Screens.TopBar
 //import com.example.m_music.ui.theme.MMusicTheme
 import com.example.m_music.ui.theme.AppTheme
@@ -63,7 +67,29 @@ class MainActivity : ComponentActivity() {
 //                }
 //            }
             AppTheme {
-                MainScreen()
+                val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = rememberTopAppBarState())
+                val navController = rememberNavController()
+
+                Scaffold(
+//        modifier = Modifier.fillMaxSize(),
+                    containerColor = Color.Transparent,
+                    topBar = {
+                        TopBar(modifier = Modifier,
+                            scrollBehavior= scrollBehavior
+                            ,navController)
+                    }
+                    ,
+                    bottomBar = {  Bottombar(navController)  }
+                ) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)
+                        .background(Color.Transparent)){
+//                    HomeScreen(navController, modifier = Modifier.padding(innerPadding))
+//                        PlayerScreen(navController, modifier = Modifier.padding(innerPadding))
+//                        SearchScreen(navController, modifier = Modifier)
+                        SearchScreen()
+                    }
+
+                }
             }
         }
     }

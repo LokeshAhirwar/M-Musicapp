@@ -2,6 +2,8 @@ package com.example.m_music.Screens
 
 import android.graphics.Color.alpha
 import android.provider.CalendarContract.Colors
+import androidx.compose.animation.VectorConverter
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -50,6 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.m_music.R
 import com.example.m_music.Repeated_functionalities.blurBackground
@@ -58,30 +61,36 @@ import com.example.m_music.ui.theme.primaryLight
 
 @Composable
 //@Preview(showSystemUi = true)
-fun PlayerScreen(navController: NavController){
+fun PlayerScreen(navController: NavController,modifier: Modifier){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.linearGradient(
+                    colors = listOf(
+                        Color(0xFFB3E5FC).copy(alpha = 0.8f), // Light Blue
+                        Color(0xFFCE93D8).copy(alpha = 0.8f)  // Light Purple
+                    )
+                )
+            )
+            .blur(30.dp) // Blur effect for glass look
+            .zIndex(-1f)
+    )
+//    {
+//        Image(painter = painterResource(R.drawable.bgphoto), contentDescription = null)
+//    }
     Box(modifier = Modifier.fillMaxSize()){
-        var clist = listOf(
-            Color.Black.copy(alpha = 0.4f),
-            Color.White.copy(alpha = .5f)
-        )
-        blurBackground(clist)
         Column(modifier = Modifier
             .fillMaxSize()
-            .background(Brush.horizontalGradient(colors = listOf(
-                Color.Blue.copy(alpha = 0.5f),
-                Color.Black.copy(alpha = 0.5f)
-            )))
             .padding(8.dp)
 
         ) {
-
-
             Card( //music card
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(40.dp)
                     .weight(2f)
-                , shape = CardDefaults.shape
+                , shape = RoundedCornerShape(40.dp)
             ) {
                 Image(painter = painterResource(R.drawable.bgphoto)
                     , contentDescription = null
@@ -106,28 +115,51 @@ fun PlayerScreen(navController: NavController){
             }
             Row(modifier = Modifier
                 .fillMaxWidth()
+                .height(120.dp)
                 .weight(1f)
-            , horizontalArrangement = Arrangement.SpaceEvenly) {
-                IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Default.Refresh,contentDescription = null
-                        , modifier = Modifier.size(40.dp))
+                , verticalAlignment = Alignment.CenterVertically
+            , horizontalArrangement = Arrangement.SpaceAround) {
+                Card(shape = CircleShape, border = BorderStroke(2.dp,Color.Black)
+                , colors = CardDefaults.cardColors(Color.Transparent)) {
+                    IconButton(onClick = { }) {
+                        Icon(painter = painterResource(R.drawable.suffle_svg_icon),contentDescription = null
+                            , modifier = Modifier.size(40.dp))
+                    }
                 }
-                IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Default.KeyboardArrowLeft,contentDescription = null
-                        , modifier = Modifier.size(40.dp))
+               Card(shape = CircleShape,border = BorderStroke(2.dp,Color.Black)
+                   , colors = CardDefaults.cardColors(Color.Transparent)) {
+                   IconButton(onClick = { }) {
+                       Icon(imageVector = Icons.Default.KeyboardArrowLeft,contentDescription = null
+                           , modifier = Modifier.size(40.dp))
+                   }
+               }
+
+                Card(shape = CircleShape,border = BorderStroke(2.dp,Color.Black)
+                    , colors = CardDefaults.cardColors(Color.Transparent),modifier = Modifier.size(100.dp)) {
+                    Box(modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center){
+                        IconButton(onClick = { }) {
+                            Icon(painter = painterResource(R.drawable.play_rounded),contentDescription = "payer button",modifier= Modifier.size(100.dp)
+                            )
+                        }
+                    }
+
                 }
-                IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Default.PlayArrow,contentDescription = "payer button"
-                    , modifier = Modifier.size(70.dp))
+                Card(shape = CircleShape,border = BorderStroke(2.dp,Color.Black)
+                    , colors = CardDefaults.cardColors(Color.Transparent)) {
+                    IconButton(onClick = { }) {
+                        Icon(imageVector = Icons.Default.KeyboardArrowRight,contentDescription = null
+                            , modifier = Modifier.size(40.dp))
+                    }
                 }
-                IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Default.KeyboardArrowRight,contentDescription = null
-                        , modifier = Modifier.size(40.dp))
+                Card(shape = CircleShape,border = BorderStroke(2.dp,Color.Black)
+                    , colors = CardDefaults.cardColors(Color.Transparent)) {
+                    IconButton(onClick = { }) {
+                        Icon(imageVector = Icons.Default.FavoriteBorder,contentDescription = null
+                            , modifier = Modifier.size(40.dp))
+                    }
                 }
-                IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Default.FavoriteBorder,contentDescription = null
-                        , modifier = Modifier.size(40.dp))
-                }
+
 
 
 

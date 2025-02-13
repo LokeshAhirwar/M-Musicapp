@@ -33,7 +33,7 @@ sealed  class Routes(val routes: String){
 //            get() = Icons.Outlined.Home
 //
 //    }
-
+//
 //    @Serializable
 //    data object PlayerScreen: Routes()
 //    {
@@ -45,7 +45,7 @@ sealed  class Routes(val routes: String){
 //        override val outlinedIcon: ImageVector
 //            get() = Icons.Outlined.PlayArrow
 //    }
-
+//
 //    @Serializable
 //    data object Search: Routes()
 //    {

@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -40,31 +41,49 @@ import com.example.m_music.R
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 
 //@Preview(showSystemUi = true)
 @Composable
-fun HomeScreen(navController: NavController)
+fun HomeScreen(navController: NavController,modifier: Modifier)
 {
-    Column(modifier = Modifier
+    Box(modifier = Modifier
         .fillMaxSize()
-        .padding(8.dp)
-        .background(brush = Brush.verticalGradient(colors = listOf(
-            Color.DarkGray.copy(alpha = 0.5f)
-            ,Color.Blue.copy(alpha = 0.3f)
-            ,Color.Gray.copy(alpha = 0.5f)
-        )))) {
+        .background(Brush.verticalGradient(colors = listOf(
+            Color.Green.copy(alpha = 0.5f)
+            ,Color.Blue.copy(alpha = 0.5f)
+            ,Color.Magenta.copy(alpha = 0.5f)
+        )))
+        .blur(10.dp)
+        .zIndex(-1f)){
+
+
+    }
+    Column(modifier = Modifier
+        .padding()
+        .fillMaxSize()
+//        .background(brush = Brush.verticalGradient(colors = listOf(
+//            Color.DarkGray.copy(alpha = 0.5f)
+//            ,Color.Blue.copy(alpha = 0.3f)
+//            ,Color.Gray.copy(alpha = 0.5f)
+//        )))
+//        .blur(10.dp)
+//        .zIndex(-1f)
+    ) {
         Text("All Songs ",
             fontSize = 30.sp)
+//        Spacer(modifier.height(20.dp))
         albumRow()
         }
-    Spacer(modifier = Modifier.height(20.dp))
+//    Spacer(modifier = Modifier.height(20.dp))
 
-
+//    }
 }
 @Composable
 fun albumRow(){

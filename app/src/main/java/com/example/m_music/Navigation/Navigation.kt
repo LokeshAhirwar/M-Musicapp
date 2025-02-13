@@ -18,13 +18,13 @@ fun navigation(modifier: Modifier){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home"){
        composable(route = Routes.Home.routes){
-           HomeScreen(navController)
+           HomeScreen(navController,modifier = Modifier)
        }
         composable(route = Routes.Search.routes){
-            SearchScreen(navController)
+//            SearchScreen(navController,modifier = Modifier)
         }
         composable(route = Routes.PlayScreen.routes){
-            PlayerScreen(navController)
+//            PlayerScreen(navController,modifier = Modifier)
         }
 //        composable<BhaiyaRoutes.Home>{
 //            HomeScreen(navController)
