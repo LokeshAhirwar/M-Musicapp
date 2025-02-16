@@ -3,8 +3,10 @@ package com.example.m_music.Screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,7 +29,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -71,7 +75,6 @@ fun SearchScreen()
         ))
     )
     var searchText by remember { mutableStateOf("") }
-    var enableState by remember { mutableStateOf(false) }
 
     Box(
 
@@ -87,13 +90,11 @@ fun SearchScreen()
                 , placeholder = { Text("Search your favorites here")}
                 , leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search here") }
                 , shape = RoundedCornerShape(20.dp)
-                , enabled = enableState
-
-            ,modifier = Modifier
+                ,modifier = Modifier
 //                .background(Color.White.copy(alpha = .5f))
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp)
-                    .clickable(onClick = { enableState = true}))
+                    .clickable(onClick = { }))
 
             val result = albumList.filter { it.title.contains(searchText,ignoreCase = true) }
             LazyColumn {
@@ -112,17 +113,24 @@ fun SearchScreen()
 
 @Composable
 fun ShowAlbumList(redAlbum: Album){
-    Card(modifier = Modifier
-        .size(150.dp)
-        .padding(30.dp)
-    , shape = RoundedCornerShape(10.dp)
-        ,
+    Row(modifier = Modifier.fillMaxWidth()
+        .background(Color.Transparent)
+        , verticalAlignment = Alignment.Top
+        , horizontalArrangement = Arrangement.Start
     ) {
-        Image(painter = painterResource(redAlbum.imageres), contentScale = ContentScale.Crop, contentDescription = redAlbum.title)
-        Text(redAlbum.title)
-        Spacer(modifier = Modifier.height(30.dp))
+        Card(modifier = Modifier
+            .size(150.dp)
+            .padding(30.dp)
+            , shape = RoundedCornerShape(10.dp)
+            ,
+        ) {
+            Image(painter = painterResource(redAlbum.imageres), contentScale = ContentScale.Crop, contentDescription = redAlbum.title)
+
+        }
+            Text(text = redAlbum.title, modifier = Modifier.padding(top =  30.dp))
 
     }
+
 
 
 }
